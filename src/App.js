@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Form } from './Form';
 
 function App() {
+  const [quote, setQuote] = useState(null);
+
+  const handleClick = () => {
+    if(!quote) {
+      fetch('https://jsonplaceholder.typicode.com/todos/2')
+      .then(response => response.json())
+      .then(json => setQuote(json.title))
+    } else {
+      setQuote(null)
+    }
+    
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Testing with React Testing Library</h1>
+      <button onClick={handleClick}>Click</button>
+      <h2>{quote? quote : 'Nothing to see here.'}</h2>
+      <div>
+        <Form />
+      </div>
     </div>
   );
 }

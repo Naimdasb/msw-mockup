@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form test 1`] = `
+<div>
+  <form>
+    <h1>
+      John
+    </h1>
+    <h2>
+      Chon
+    </h2>
+    <label
+      for="username"
+    >
+      Username
+    </label>
+    <br />
+    <input
+      id="username"
+      name="username"
+      type="text"
+      value="John"
+    />
+    <br />
+    <label
+      for="password"
+    >
+      Password
+    </label>
+    <br />
+    <input
+      id="password"
+      name="password"
+      type="text"
+      value="Chon"
+    />
+    <br />
+    <button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;
