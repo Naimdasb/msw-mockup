@@ -1,5 +1,7 @@
 import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import { Form } from '../Form';
+import userEvent from '@testing-library/user-event'
+
 
 afterEach(cleanup)
 
@@ -12,13 +14,13 @@ test('Form test', async () => {
     expect(passwordInput).toBeInTheDocument()
     expect(submit).toBeInTheDocument()
 
-    fireEvent.change(usernameInput, { target: { value: 'John' } })
-    expect(usernameInput.value).toBe('John')
+    userEvent.type(usernameInput,'John')
+    expect(usernameInput).toHaveValue('John')
 
-    fireEvent.change(passwordInput, { target: { value: 'Chon' } })
-    expect(passwordInput.value).toBe('Chon')
+    userEvent.type(passwordInput,'Chon')
+    expect(passwordInput).toHaveValue('Chon')
 
-    fireEvent.click(submit)
+    userEvent.click(submit)
 
     await waitFor(() => getByText('John'))
     await waitFor(() => getByText('Chon'))
@@ -35,13 +37,13 @@ test('Form test error', async () => {
     expect(passwordInput).toBeInTheDocument()
     expect(submit).toBeInTheDocument()
 
-    fireEvent.change(usernameInput, { target: { value: 'John' } })
-    expect(usernameInput.value).toBe('John')
+    userEvent.type(usernameInput,'John')
+    expect(usernameInput).toHaveValue('John')
 
-    fireEvent.change(passwordInput, { target: { value: 'fail' } })
-    expect(passwordInput.value).toBe('fail')
+    userEvent.type(passwordInput,'fail')
+    expect(passwordInput).toHaveValue('fail')
 
-    fireEvent.click(submit)
+    userEvent.click(submit)
 
     await waitFor(() => getByText('Error'))
    
