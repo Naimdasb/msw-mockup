@@ -4,6 +4,7 @@ export const Form = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [response, setResponse] = useState({username: '', password: ''})
+    const [error, setError] = useState(false)
 
 
     const handleChange = (event) => {
@@ -21,7 +22,15 @@ export const Form = () => {
                         }
                         )
             .then(res => res.json())
-            .then(res => setResponse(res))
+            .then(res => {
+                if(res.errorMessage) {
+                    setError(true)
+                } else {
+                    setResponse(res)
+                }
+            })
+            
+            
         event.preventDefault()
     }
 
@@ -29,6 +38,7 @@ export const Form = () => {
         <form onSubmit={handleSubmit}>
             <h1>{response.username}</h1>
             <h2>{response.password}</h2>
+            <h3>{error && 'Error'}</h3>
             <label htmlFor='username'>Username</label>
             <br />
             <input onChange={handleChange} value={username} id='username' name='username' type='text' />

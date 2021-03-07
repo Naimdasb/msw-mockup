@@ -6,6 +6,10 @@ export const handlers = [
     }),
     rest.post('/send', (req, res, ctx) => {
         const {username, password} = req.body;
-        return res(ctx.json({username, password}))
+        if (password !== 'fail') {
+            return res(ctx.status(200), ctx.json({username, password}))
+        } else {
+            return res(ctx.status(403), ctx.json({errorMessage: 'error'}))
+        }
     })
 ]
